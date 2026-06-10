@@ -419,7 +419,7 @@
         </div>
         <script>
             "use strict";
-            let n1 , n2 , operation , answer;
+            let n1 , n2 , operation , answer , display;
             function zero(){
                 document.getElementById("text").textContent += "0"
             }
@@ -473,51 +473,80 @@
                 document.getElementById("text").textContent = percentagenumber;
             }
             function addition(){
-                n1 = document.getElementById("text").textContent;
+                n1 = Number(document.getElementById("text").textContent);
                 clearall();
                 operation = "addition";
                 return "addition";
             }
             function subtraction(){
-                n1 = document.getElementById("text").textContent;
+                n1 = Number(document.getElementById("text").textContent);
                 clearall();
                 operation = "subtraction";
                 return "subtraction";
             }
             function multiplication(){
-                n1 = document.getElementById("text").textContent;
+                n1 = Number(document.getElementById("text").textContent);
                 clearall();
                 operation = "multiplication";
                 return "multiplication";
             }
             function division(){
-                n1 = document.getElementById("text").textContent;
+                n1 = Number(document.getElementById("text").textContent);
                 clearall();
                 operation = "division";
                 return "division";
             }
             function equal(){
-                n2 = document.getElementById("text").textContent;
+                n2 = Number(document.getElementById("text").textContent);
                 clearall();
                 switch (operation){
                     case "addition":
                         answer = Number(n1) + Number(n2);
+                        answer = String(answer);
                         document.getElementById("text").textContent = answer;
                         return;
                     case "subtraction":
                         answer = Number(n1) - Number(n2);
+                        answer = String(answer);
                         document.getElementById("text").textContent = answer;
                         return;
                     case "multiplication": 
                         answer = Number(n1) * Number(n2);
+                        answer = String(answer);
                         document.getElementById("text").textContent = answer;
                         return;
                     case "division": 
                         answer = Number(n1) /  Number(n2);
+                        answer = String(answer);
                         document.getElementById("text").textContent = answer;
                         return;
                 }
 
+            }
+            function signs(){
+                if (display === ""){
+                    return;
+                }
+                display = document.getElementById("text").textContent;
+                if (Math.sign(display) === 1){
+                    display = display * -1;
+                    document.getElementById("text").textContent = display;
+                    return;
+                }
+                else if (Math.sign(display) === -1){
+                    display = display * -1;
+                    document.getElementById("text").textContent = display;
+                    return;
+                }
+            }
+            function decimal(){
+                display = String(display);
+                if (display.includes(".")){
+                    return;
+                }
+                display = document.getElementById("text").textContent += ".";
+                document.getElementById("text").textContent = display;
+                return;
             }
             document.getElementById("zero").onclick = zero;
             document.getElementById("one").onclick = one;
@@ -537,6 +566,8 @@
             document.getElementById("multiplication").onclick = multiplication;
             document.getElementById("division").onclick = division;
             document.getElementById("equal").onclick = equal;
-        </script>
+            document.getElementById("sign").onclick = signs;
+            document.getElementById("decimal").onclick = decimal;
+        </script>    
     </body>
 </html>
